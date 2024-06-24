@@ -5,6 +5,7 @@ import Home from "../screens/Home";
 import Search from "../screens/Search";
 import Favorite from "../screens/Favorite";
 import HomeStackNavigation from "./HomeStackNavigation";
+import FavoriteStackNavigation from "./FavoriteStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ function BottomTabNavigator(): JSX.Element {
       />
       <Tab.Screen
         name="Favorite"
-        component={Favorite}
+        component={FavoriteStackNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="heart" size={28} color={color} />
