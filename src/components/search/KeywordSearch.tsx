@@ -29,13 +29,14 @@ export default function KeywordSearch() {
       });
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ alignItems: "center" }}>
       <TextInput
         style={{
           backgroundColor: "white",
           padding: 20,
           borderRadius: 999,
           marginVertical: 10,
+          width: "100%",
         }}
         onSubmitEditing={() => {
           getMovieDetail();
@@ -47,7 +48,15 @@ export default function KeywordSearch() {
         {keyword}
       </TextInput>
       <FlatList
-        style={{ marginTop: 20, paddingLeft: 10, marginBottom: 420 }}
+        style={{
+          marginTop: 20,
+
+          marginBottom: 420,
+          width: win.width,
+        }}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
         data={movies}
         renderItem={({ item }) => (
           <View style={{ marginBottom: 10 }}>

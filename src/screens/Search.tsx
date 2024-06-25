@@ -13,8 +13,8 @@ export default function Search(): JSX.Element {
   const [selectedBar, setSelectedBar] = useState<string>("keyword");
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
+    <SafeAreaView>
+      <View style={styles.container}>
         <View style={styles.topBarContainer}>
           {["keyword", "category"].map((item: string, index: number) => (
             <TouchableOpacity

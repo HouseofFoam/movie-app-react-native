@@ -80,7 +80,7 @@ export default function CategorySearch() {
           >
             <View
               style={{
-                width: 140,
+                width: win.width / 2 - 40,
                 backgroundColor:
                   item.id === selectedGenre?.id ? "#8978A4" : "#C0B4D5",
                 padding: 20,
