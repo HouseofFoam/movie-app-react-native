@@ -1,16 +1,24 @@
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  Dimensions,
+} from "react-native";
+import { GenreElement, Movie } from "../types/app";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import MovieItem from "../components/movies/MovieItem";
 import { API_ACCESS_TOKEN } from "@env";
-import { useState } from "react";
-import { View, Text, TextInput, FlatList, Dimensions } from "react-native";
-import { Movie } from "../../types/app";
-import MovieItem from "../movies/MovieItem";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const win = Dimensions.get("window");
-export default function KeywordSearch() {
-  const [keyword, setKeyword] = useState("");
+export default function Genre({ route }: any): JSX.Element {
+  const { id, name } = route.params;
   const [movies, setMovies] = useState<Movie[]>([]);
-  const getMovieDetail = (): void => {
-    const url = `https://api.themoviedb.org/3/search/movie?query=${keyword}`;
+
+  const getMovieByGenre = (): void => {
+    const url = `https://api.themoviedb.org/3/discover/movie?with_genres=${id}`;
     const options = {
       method: "GET",
       headers: {
@@ -28,26 +36,18 @@ export default function KeywordSearch() {
         console.log(errorResponse);
       });
   };
+
+  useEffect(() => {
+    getMovieByGenre();
+  }, []);
+
   return (
-    <SafeAreaView>
-      <TextInput
-        style={{
-          backgroundColor: "white",
-          padding: 20,
-          borderRadius: 999,
-          marginVertical: 10,
-        }}
-        onSubmitEditing={() => {
-          getMovieDetail();
-        }}
-        onChangeText={(text) => {
-          setKeyword(text);
-        }}
-      >
-        {keyword}
-      </TextInput>
+    <SafeAreaView style={styles.container}>
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: 20 }}>
+        Result of {name} Genre
+      </Text>
       <FlatList
-        style={{ marginTop: 20, paddingLeft: 10, marginBottom: 420 }}
+        style={{ marginTop: 20 }}
         data={movies}
         renderItem={({ item }) => (
           <View style={{ marginBottom: 10 }}>
@@ -68,3 +68,12 @@ export default function KeywordSearch() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: win.width,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

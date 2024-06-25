@@ -45,3 +45,12 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface Genre {
+  genres: GenreElement[];
+}
+
+export interface GenreElement {
+  id: number;
+  name: string;
+}
